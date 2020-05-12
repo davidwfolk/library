@@ -1,15 +1,14 @@
 ﻿using System;
 using console_library.Models;
 
-namespace library
+namespace console_library
 {
-    class Program
+  class Program
+  {
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            Book myBook = new Book();
-            myBook.Author = "Shel Silverstein";
-            myBook.Title = "Where The Sidewalk Ends";
-        }
+      App app = new App();
+      app.Run();
     }
+  }
 }
