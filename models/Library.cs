@@ -9,96 +9,98 @@ namespace console_library.Models
     public string Location { get; set; }
     public string Name { get; set; }
 
-    private List<Book> Books { get; set; }
+    private List<ICheckout> Items { get; set; }
 
     public Library(string location, string name)
     {
       Location = location;
       Name = name;
-      Books = new List<Book> { };
+      Items = new List<ICheckout> { };
     }
     public void LibrarySetup()
     {
       Console.WriteLine($"Welcome to the {Location} Library!");
-      Book eloquentJavaScript = new Book("Eloquent Javascript", "Marijn Haverbeke");
-      Book introducingPython = new Book("Introducing Python", "Bill Lubanovic");
-      Book withoutRemorse = new Book("Without Remorse", "Tom Clancy");
-      Book bourneIdentity = new Book("The Bourne Identity", "Robert Ludlum");
+      Book jabJab = new Book("Jab Jab Jab Right Hook", "Gary Vaynerchuk");
+      Book TMMO = new Book("Total Money Makeover", "Dave Ramzy");
+      Book golfPerfect = new Book("Golf Is Not A Game Of Perfect", "Bob Rotella");
+      Book historyUS = new Book("A Patriot's History of the United States", "Larry Schweikart");
+      Magazine golfDigest = new Magazine("Golf Digest", "March 2020");
 
-      Books.Add(eloquentJavaScript);
-      Books.Add(introducingPython);
-      Books.Add(withoutRemorse);
-      Books.Add(bourneIdentity);
+      Items.Add(jabJab);
+      Items.Add(TMMO);
+      Items.Add(golfPerfect);
+      Items.Add(historyUS);
+      Items.Add(golfDigest);
     }
 
     public void PrintAvailableBooks()
     {
-      for (int i = 0; i < Books.Count; i++)
+      for (int i = 0; i < Items.Count; i++)
       {
-        Book book = Books[i];
-        if (book.Available)
+        ICheckout item = Items[i];
+        if (item.Available)
         {
-          Console.WriteLine($"{i + 1}) {Books[i].Title} - {Books[i].Author}");
+          Console.WriteLine($"{i + 1}) {Items[i].Title}");
         }
       }
     }
     public void PrintReturnableBooks()
     {
-      for (int i = 0; i < Books.Count; i++)
+      for (int i = 0; i < Items.Count; i++)
       {
-        Book book = Books[i];
-        if (!book.Available)
+        ICheckout item = Items[i];
+        if (!item.Available)
         {
-          Console.WriteLine($"{i + 1}) {Books[i].Title} - {Books[i].Author}");
+          Console.WriteLine($"{i + 1}) {Items[i].Title}");
         }
       }
     }
     public void CheckoutBook()
     {
       PrintAvailableBooks();
-      Console.WriteLine("Which book would you like to check out?");
+      Console.WriteLine("Which item would you like to check out?");
       string input = Console.ReadLine();
       int index;
-      if (int.TryParse(input, out index) != false && index - 1 < Books.Count && index - 1 > -1)
+      if (int.TryParse(input, out index) != false && index - 1 < Items.Count && index - 1 > -1)
       {
-        Book book = Books[index - 1];
-        if (!book.Available)
+        ICheckout item = Items[index - 1];
+        if (!item.Available)
         {
-          Console.WriteLine("That book has already been checked out!");
+          Console.WriteLine("That item has already been checked out!");
         }
         else
         {
-          book.Available = false;
-          Console.WriteLine($"You have checked out {book.Title}");
+          item.Available = false;
+          Console.WriteLine($"You have checked out {item.Title}");
         }
       }
       else
       {
-        Console.WriteLine("Invalid Book Selection");
+        Console.WriteLine("Invalid Selection");
       }
     }
     public void ReturnBook()
     {
       PrintReturnableBooks();
-      Console.WriteLine("Which book would you like to return?");
+      Console.WriteLine("Which item would you like to return?");
       string input = Console.ReadLine();
       int index;
-      if (int.TryParse(input, out index) != false && index - 1 < Books.Count && index - 1 > -1)
+      if (int.TryParse(input, out index) != false && index - 1 < Items.Count && index - 1 > -1)
       {
-        Book book = Books[index - 1];
-        if (book.Available)
+        ICheckout item = Items[index - 1];
+        if (item.Available)
         {
-          Console.WriteLine("That book has already been returned!");
+          Console.WriteLine("That item has already been returned!");
         }
         else
         {
-          book.Available = true;
-          Console.WriteLine($"You have returned {book.Title}");
+          item.Available = true;
+          Console.WriteLine($"You have returned {item.Title}");
         }
       }
       else
       {
-        Console.WriteLine("Invalid Book Selection");
+        Console.WriteLine("Invalid Selection");
       }
     }
   }

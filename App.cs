@@ -10,7 +10,7 @@ namespace console_library
 
     public void Run()
     {
-      MyLibrary = new Library("Boise", "Boise Library");
+      MyLibrary = new Library("Kuna", "Kuna Library");
       Console.Clear();
       MyLibrary.LibrarySetup();
       Running = true;

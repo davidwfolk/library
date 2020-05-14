@@ -1,16 +1,16 @@
 namespace console_library.Models
 {
-  public class Book : ICheckout
+  public class Magazine : ICheckout
   {
-    public string Author { get; set; }
     public string Title { get; set; }
+    public string Month { get; set; }
     public bool Available { get; set; }
 
   
-  public Book(string title, string author)
+  public Magazine(string title, string month)
   {
     Title = title;
-    Author = author;
+    Month = month;
     Available = true;
   }
   }
